@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+package org.fok.action.model;
+
+enum ActionTestModule {
+	ATI = 0; 
+};
+
+enum ActionTestCommand {
+	STR = 0; // 设置节点账户并启动主链
+	
+	NGB = 10; // 生成测试用创世块
+	NEB = 11; // 生成block
+	
+	NTT = 20; // 生成交易
+	
+	NAC = 40; // 创建一个测试账户，并初始化账户余额
+}
+
+message ReqCreateAccount {
+	string amount = 1;
+	string token = 2;
+}
+
+message RespCreateAccount {
+	int32 retCode = 1;
+	string retMsg = 2;
+	string address = 3;
+	string privateKey = 4;
+}
+
+message ReqCreateTransaction {
+	string fromAddress = 1;
+	string privKey = 2;
+	string toAddress = 3;
+	string amount = 4;
+	int64 timestamp = 5;
+	int32 nonce = 6;
+}
+
+message RespCreateTransaction {
+	int32 retCode = 1;
+	string retMsg = 2;
+	string hash = 3;
+}
+
+message ReqStartBlockChain {
+	string address = 1;
+}
+
+message RespStartBlockChain {
+	int32 retCode = 1;
+	string retMsg = 2;
+}
+
+message ReqMakeNewBlock {
+	int32 txCount = 1;
+	int32 minConfirmed= 2;
+}
+
+message RespMakeNewBlock {
+	int32 retCode = 1;
+	string retMsg = 2;
+	string blockHash = 3;
+	string height = 4;
+	string parentHash = 5;
+	string stateRoot = 6;
+	string txRoot = 7;
+	string receiptRoot = 8;
+}
